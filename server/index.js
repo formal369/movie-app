@@ -60,7 +60,6 @@ app.post('/api/users/login', (req, res) => {
     })
 })
 
-Router
 
 
 // role 1 어드민        role 2 특정 부서 어드민
@@ -76,6 +75,13 @@ app.get('/api/users/auth', auth, (req, res) => {
         lastName: req.user.lastName,
         role: req.user.role,
         image: req.user.image
+    })
+})
+
+app.get('/api/users/logout', auth, (req, res) => {
+    User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
+        if(err) return res.json({ success: false, err });
+        return res.status(200).send({ success: true });
     })
 })
 
