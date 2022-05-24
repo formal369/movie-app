@@ -7,6 +7,7 @@ import LandingPage from './views/LandingPage/LandingPage';
 import LoginPage from './views/LoginPage/LoginPage';
 import RegisterPage from './views/RegisterPage/RegisterPage';
 import MovieDetail from './views/MovieDetail/MovieDetail';
+import FavoritePage from './views/FavoritePage/FavoritePage';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
   const AuthLoginPage = Auth(LoginPage, false);
   const AuthRegisterPage = Auth(RegisterPage, false);
   const AuthMovieDetail = Auth(MovieDetail, null);
+  const AuthFavoritesPage = Auth(FavoritePage, true);
   
   return (
     <>
@@ -24,6 +26,7 @@ function App() {
           <Route exact path="/login" element={<AuthLoginPage />} />
           <Route exact path="/register" element={<AuthRegisterPage />} />
           <Route exact path="/movie/:movieId" element={<AuthMovieDetail />} />
+          <Route exact path="/favorite" element={<AuthFavoritesPage />} />
         </Routes>
       </Router>
     </>
