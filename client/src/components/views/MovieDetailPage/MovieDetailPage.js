@@ -5,15 +5,22 @@ import MainImage from '../LandingPage/Sections/MainImage';
 import MovieInfo from './Sections/MovieInfo';
 import GridCards from '../commons/GridCards';
 import Favorite from './Sections/Favorite';
+import Comment from './Sections/Comment';
 import { Row } from 'antd';
+import Axios from 'axios';
 
-const MovieDetail = () => {
+const MovieDetailPage = () => {
     
     const { movieId } = useParams();
 
     const [Movie, setMovie] = useState([]);
     const [Casts, setCasts] = useState([]);
     const [ActorToggle, setActorToggle] = useState(false);
+    const [Comments, setComments] = useState([]);
+
+    const movieVariable = {
+        movieId: movieId
+    }
 
     useEffect(() => {
         let endpointCrew = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`;
@@ -32,10 +39,24 @@ const MovieDetail = () => {
                 setCasts(response.cast)
             })
 
+        Axios.post('/api/comment/getComments', movieVariable)
+            .then(response => {
+                console.log(response)
+                if(response.data.success) {
+                    setComments(response.data.comments)
+                } else {
+                    alert('코멘트 정보를 가져오지 못했습니다.')
+                }
+            })
+
     }, [])
 
     const toggleActorView = () => {
         setActorToggle(!ActorToggle)
+    }
+
+    const refreshFunction = (newComment) => {
+        setComments(Comments.concat(newComment))
     }
 
     return (
@@ -82,11 +103,12 @@ const MovieDetail = () => {
                     </Row>
                 }
 
-                
+                {/* Comments */}
+                <Comment postId={movieId} commentLists={Comments} refreshFunction={refreshFunction} />
 
             </div>
         </div>
     );
 };
 
-export default MovieDetail;
+export default MovieDetailPage;
