@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { Comment } = require('../models/Comment');
 
+//=================================
+//             Comment
+//=================================
+
 router.post('/saveComment', (req, res) => {
 
     const comment = new Comment(req.body);

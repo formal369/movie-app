@@ -15,6 +15,7 @@ app.use(cookieParser());
 app.use('/api/users', require('./routes/user'));
 app.use('/api/favorite', require('./routes/favorite'));
 app.use('/api/comment', require('./routes/comment'));
+app.use('/api/like', require('./routes/like'));
 
 const mongoose = require('mongoose');
 mongoose.connect(config.mongoURI)

@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../Config';
+import Axios from 'axios';
+import { Row } from 'antd';
+
+
 import MainImage from '../LandingPage/Sections/MainImage';
 import MovieInfo from './Sections/MovieInfo';
 import GridCards from '../commons/GridCards';
 import Favorite from './Sections/Favorite';
 import Comment from './Sections/Comment';
-import { Row } from 'antd';
-import Axios from 'axios';
+import LikeDislikes from './Sections/LikeDislikes';
 
 const MovieDetailPage = () => {
     
@@ -71,8 +74,16 @@ const MovieDetailPage = () => {
             {/* Body */}
             <div style={{ width: '85%', margin: '1rem auto' }}>
 
+                {/* Favorite */}
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                     <Favorite movieInfo={Movie} movieId={movieId} userFrom={localStorage.getItem('userId')} />
+                </div>
+
+                <br/>
+
+                {/* LikeDisLikes */}
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <LikeDislikes movie userId={localStorage.getItem('userId')} movieId={movieId}  />
                 </div>
 
                 {/* Movie Info */}
@@ -102,6 +113,8 @@ const MovieDetailPage = () => {
 
                     </Row>
                 }
+
+                
 
                 {/* Comments */}
                 <Comment postId={movieId} commentLists={Comments} refreshFunction={refreshFunction} />

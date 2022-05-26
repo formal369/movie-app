@@ -3,6 +3,8 @@ import { Comment, Avatar, Button, Input } from 'antd';
 import Axios from 'axios';
 import { useSelector } from 'react-redux';
 
+import LikeDislikes from './LikeDislikes';
+
 const { TextArea } = Input;
 
 const SingleComment = (props) => {
@@ -16,7 +18,10 @@ const SingleComment = (props) => {
     }
 
     const actions = [
-        <span onClick={onClickReplyOpen} key="comment-basic-reply-to">Reply to</span>
+        <React.Fragment>
+            <LikeDislikes userId={localStorage.getItem('userId')} commentId={props.comment._id} />
+            <span onClick={onClickReplyOpen} key="comment-basic-reply-to">Reply to</span>
+        </React.Fragment>
     ]
 
     const onHandleChange = (event) => {
