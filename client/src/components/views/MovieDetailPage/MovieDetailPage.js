@@ -21,13 +21,11 @@ const MovieDetailPage = () => {
     const [ActorToggle, setActorToggle] = useState(false);
     const [Comments, setComments] = useState([]);
 
-    const movieVariable = {
-        movieId: movieId
-    }
+    const movieVariable = { movieId: movieId }
 
     useEffect(() => {
-        let endpointCrew = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`;
-        let endpointInfo = `${API_URL}movie/${movieId}?api_key=${API_KEY}`
+        let endpointCrew = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`;     // 영화 스태프 정보
+        let endpointInfo = `${API_URL}movie/${movieId}?api_key=${API_KEY}`              // 영화 전체 정보
 
         fetch(endpointInfo)
             .then(response => response.json())
@@ -58,6 +56,7 @@ const MovieDetailPage = () => {
         setActorToggle(!ActorToggle)
     }
 
+    // 하위 컴포넌트의 코멘트를 상위 컴포넌트의 코멘트와 병합하는 함수 (댓글과 대댓글을 달 때마다 상위 컴포넌트에 업데이트를 해줘야 됨)
     const refreshFunction = (newComment) => {
         setComments(Comments.concat(newComment))
     }

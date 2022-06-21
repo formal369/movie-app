@@ -44,7 +44,7 @@ const LandingPage = (props) => {
                     />
             }
 
-            <div style={{ width: '85%', margin: '5rem auto' }}>
+            <div style={{ width: '85%', margin: '4rem auto' }}>
 
                 <h2>Movies by latest</h2>
                 <hr />

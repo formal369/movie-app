@@ -13,8 +13,8 @@ router.post('/saveComment', (req, res) => {
     comment.save((err, comment) => {
         if(err) return res.json({ success: false, err })
 
-        Comment.find({'_id': comment._id})
-            .populate('writer')
+        Comment.find({'_id': comment._id})                  // comment.find()를 쓰면 .populate('writer')를 사용해서
+            .populate('writer')                             // writer의 정보를 가져올 수 없기 때문에 Comment를 사용함 
             .exec((err, result) => {
                 if(err) return res.json({ success: false, err })
                 res.status(200).json({ success: true, result })
